@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+streamlit
+streamlit-drawable-canvas
+Pillow
+numpy
+torch
+torchvision
+requests
+python-multipart
+opencv-python-headless
