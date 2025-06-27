@@ -1,0 +1,70 @@
+.
+├── Dockerfile.api
+├── Dockerfile.front
+├── data
+│   └── MNIST
+│       └── raw
+│           ├── t10k-images-idx3-ubyte
+│           ├── t10k-images-idx3-ubyte.gz
+│           ├── t10k-labels-idx1-ubyte
+│           ├── t10k-labels-idx1-ubyte.gz
+│           ├── train-images-idx3-ubyte
+│           ├── train-images-idx3-ubyte.gz
+│           ├── train-labels-idx1-ubyte
+│           └── train-labels-idx1-ubyte.gz
+├── debug_20250626002241328062.png
+├── debug_20250626002301080388.png
+├── debug_20250626003130968336.png
+├── debug_20250626003138619321.png
+├── debug_20250626003144760957.png
+├── debug_20250626003149348544.png
+├── debug_20250626003154594420.png
+├── debug_20250626013449717622.png
+├── debug_20250626013455702136.png
+├── debug_20250626013500598372.png
+├── debug_20250626013508367188.png
+├── debug_20250626013515101769.png
+├── debug_20250626013522020050.png
+├── debug_20250626013526804154.png
+├── debug_20250626013532168570.png
+├── debug_20250626013953195383.png
+├── debug_20250626013959582478.png
+├── debug_20250626014005145658.png
+├── debug_20250626014012264586.png
+├── debug_20250626014017841778.png
+├── debug_20250626014024360631.png
+├── debug_20250626014028844253.png
+├── debug_20250626014034348405.png
+├── debug_20250626014042679993.png
+├── debug_20250627070108292106.png
+├── docker-compose.yml
+├── model
+├── notebook
+│   ├── 01_mnist_exploration.py
+│   ├── generate_image.py
+│   ├── test_convnet.py
+│   ├── test_mlp.py
+│   └── test_predict.py
+├── requirements.txt
+├── src
+│   ├── app
+│   │   ├── main.py
+│   │   └── streamlit_app.py
+│   └── model
+│       ├── convnet.py
+│       ├── mlp.py
+│       └── train.py
+├── structure.txt
+└── test_images
+    ├── 0.png
+    ├── 1.png
+    ├── 2.png
+    ├── 3.png
+    ├── 4.png
+    ├── 5.png
+    ├── 6.png
+    ├── 7.png
+    ├── 8.png
+    └── 9.png
+
+10 directories, 58 files
