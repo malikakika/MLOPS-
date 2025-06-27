@@ -1,5 +1,3 @@
-# src/app/main.py
-
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 import torch
@@ -10,9 +8,8 @@ import numpy as np
 
 app = FastAPI()
 
-# Charger le modèle sauvegardé
 input_size = 28 * 28
-n_kernels = 6
+n_kernels = 16
 output_size = 10
 
 device = "mps" if torch.backends.mps.is_available() else "cpu"

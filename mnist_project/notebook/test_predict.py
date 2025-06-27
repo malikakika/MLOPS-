@@ -1,7 +1,14 @@
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.model.convnet import ConvNet
 import torch
 from PIL import Image
 import numpy as np
 from src.model.convnet import ConvNet
+
 
 # Choisir le device
 device = "mps" if torch.backends.mps.is_available() else "cpu"
@@ -23,7 +30,7 @@ def transform_image(filepath):
     tensor = (tensor - 0.1307) / 0.3081
     return tensor.to(device)
 
-image_path = "test_images/debug_20250626005401555503.png"  
+image_path = "test_images/1.png"  
 input_tensor = transform_image(image_path)
 
 with torch.no_grad():

@@ -1,11 +1,18 @@
+# Backend (FastAPI)
 fastapi
 uvicorn
+python-multipart
+requests
+
+# Frontend (Streamlit)
 streamlit
 streamlit-drawable-canvas
-Pillow
-numpy
+
+# Deep Learning
 torch
 torchvision
-requests
-python-multipart
+
+# Traitement d’image
+Pillow
 opencv-python-headless
+numpy
