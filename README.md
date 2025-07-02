@@ -1,6 +1,29 @@
-# MNIST Classification – Projet Deep Learning
+# 🧠 MNIST Classification – Projet Deep Learning
 
-Ce projet consiste à entraîner des modèles de classification d’images sur la base MNIST, et à mettre en production le modèle via une API FastAPI et un frontend Streamlit. Le tout est containerisé avec Docker.
+![Python](https://img.shields.io/badge/python-3.10-blue)
+![PyTorch](https://img.shields.io/badge/pytorch-2.2-red)
+![Docker](https://img.shields.io/badge/docker-ready-blue)
+
+Projet étudiant visant à entraîner et comparer deux modèles de classification (MLP et CNN) sur la base MNIST, et à les déployer via une API FastAPI et une interface utilisateur Streamlit. Le tout est conteneurisé avec Docker.
+
+---
+
+##  Sommaire
+1. [Objectif](#1-objectif)
+2. [Structure du projet](#2-structure-du-projet)
+3. [Préparation des données](#3-préparation-des-données)
+4. [Architecture des modèles](#4-architecture-des-modèles)
+5. [Entraînement du modèle](#5-entrainement-du-modèle)
+6. [Sauvegarde du modèle](#6-sauvegarde-du-modèle)
+7. [API avec FastAPI](#7-api-avec-fastapi)
+8. [Frontend avec Streamlit](#8-frontend-avec-streamlit)
+9. [Dockerisation](#9-dockerisation)
+10. [Tests](#10-tests)
+11. [Conclusion](#11-conclusion)
+12. [Lancement](#12-lancement)
+13. [Automatisation & Pipeline](#13-automatisation--pipeline)
+
+
 
 ---
 
@@ -9,8 +32,74 @@ Ce projet consiste à entraîner des modèles de classification d’images sur l
 L’objectif est de comparer deux architectures de modèles (MLP et CNN), d’explorer l’effet de permutations aléatoires des pixels, de mettre en place une API d’inférence et de proposer une interface web de prédiction de chiffres manuscrits dessinés en temps réel.
 
 ---
+## 2 Structure du projet
 
-## 2. Préparation des données
+```bash
+.
+├── .gitignore
+├── README.md
+├── data
+│   └── raw
+│       └── MNIST
+│           └── raw
+│               ├── t10k-images-idx3-ubyte
+│               ├── t10k-images-idx3-ubyte.gz
+│               ├── t10k-labels-idx1-ubyte
+│               ├── t10k-labels-idx1-ubyte.gz
+│               ├── train-images-idx3-ubyte
+│               ├── train-images-idx3-ubyte.gz
+│               ├── train-labels-idx1-ubyte
+│               └── train-labels-idx1-ubyte.gz
+├── mnist_project
+│   ├── Dockerfile.api
+│   ├── Dockerfile.front
+│   ├── data
+│   │   └── MNIST
+│   │       └── raw
+│   │           ├── t10k-images-idx3-ubyte
+│   │           ├── t10k-images-idx3-ubyte.gz
+│   │           ├── t10k-labels-idx1-ubyte
+│   │           ├── t10k-labels-idx1-ubyte.gz
+│   │           ├── train-images-idx3-ubyte
+│   │           ├── train-images-idx3-ubyte.gz
+│   │           ├── train-labels-idx1-ubyte
+│   │           └── train-labels-idx1-ubyte.gz
+│   ├── docker-compose.yml
+│   ├── model
+│   ├── notebook
+│   │   ├── 01_mnist_exploration.py
+│   │   ├── generate_image.py
+│   │   ├── test_convnet.py
+│   │   ├── test_mlp.py
+│   │   └── test_predict.py
+│   ├── requirements.txt
+│   ├── src
+│   │   ├── app
+│   │   │   ├── main.py
+│   │   │   └── streamlit_app.py
+│   │   └── model
+│   │       ├── convnet.py
+│   │       ├── mlp.py
+│   │       └── train.py
+│   └── test_images
+│       ├── 0.png
+│       ├── 1.png
+│       ├── 2.png
+│       ├── 3.png
+│       ├── 4.png
+│       ├── 5.png
+│       ├── 6.png
+│       ├── 7.png
+│       ├── 8.png
+│       └── 9.png
+├── structure.txt
+└── torch-2.2.2-cp310-none-macosx_11_0_arm64.whl
+
+15 directories, 69 files
+
+```
+
+## 3. Préparation des données
 
 Le dataset MNIST est téléchargé avec `torchvision.datasets.MNIST`. Un prétraitement est appliqué :
 
@@ -30,19 +119,19 @@ transforms.RandomPerspective(distortion_scale=0.3, p=0.5)
 
 ---
 
-## 3. Architecture des modèles
+## 4. Architecture des modèles
 
-### 3.1. MLP (Multilayer Perceptron)
+### 4.1. MLP (Multilayer Perceptron)
 
 Le modèle MLP est défini avec 3 couches linéaires et des activations ReLU intermédiaires. Il est entraîné sur les pixels aplatis (28×28).
 
-### 3.2. CNN (Convolutional Neural Network)
+### 4.2. CNN (Convolutional Neural Network)
 
 Un modèle convolutionnel simple est défini dans `convnet.py`, avec 2 couches `Conv2d`, des activations ReLU, du `MaxPool2d` et une couche fully connected finale.
 
 ---
 
-## 4. Entraînement du modèle
+## 5. Entraînement du modèle
 
 L’entraînement est réalisé dans `train.py`. La fonction `train()` applique :
 
@@ -63,7 +152,7 @@ La fonction `test()` permet de mesurer la `test_loss` et l’`accuracy`.
 
 ---
 
-## 5. Sauvegarde du modèle
+## 6. Sauvegarde du modèle
 
 Le modèle est sauvegardé dans `model/mnist-0.0.1.pt` avec :
 
@@ -73,7 +162,7 @@ torch.save(model.state_dict(), "model/mnist-0.0.1.pt")
 
 ---
 
-## 6. API avec FastAPI
+## 7. API avec FastAPI
 
 Une API est exposée dans `main.py` via FastAPI :
 
@@ -83,7 +172,7 @@ Une API est exposée dans `main.py` via FastAPI :
 
 ---
 
-## 7. Frontend avec Streamlit
+## 8. Frontend avec Streamlit
 
 L’interface graphique Streamlit permet :
 
@@ -99,7 +188,7 @@ Traitement appliqué sur l’image dessinée :
 
 ---
 
-## 8. Dockerisation
+## 9. Dockerisation
 
 Deux Dockerfiles sont créés :
 
@@ -114,7 +203,7 @@ docker compose up --build
 
 ---
 
-## 9. Tests
+## 10. Tests
 
 Des tests d’image sont faits avec :
 
@@ -128,7 +217,7 @@ On observe que :
 
 ---
 
-## 10. Conclusion
+## 11. Conclusion
 
 Ce projet illustre l’intérêt des réseaux de neurones convolutionnels pour la classification d’images structurées. Il montre aussi comment entraîner, sauvegarder et déployer un modèle en production à travers une API REST et une interface web simple.
 
@@ -141,7 +230,7 @@ Points clés :
 
 ---
 
-## Lancement
+## 12 Lancement
 
 Une fois Docker installé :
 
@@ -150,3 +239,19 @@ docker compose up --build
 ```
 
 Puis ouvrir [http://localhost:8501](http://localhost:8501)
+
+## 13. Automatisation & Pipeline (MLOps Niveau 1)
+
+Afin de rendre l’entraînement et l’évaluation reproductibles et industrialisables, un script `main_pipeline.py` a été mis en place. Il permet d’enchaîner automatiquement les étapes suivantes :
+
+- Chargement des données MNIST
+- Prétraitement (normalisation)
+- Initialisation du modèle (CNN ou MLP)
+- Entraînement
+- Évaluation (accuracy + confusion matrix)
+- Sauvegarde du modèle entraîné
+
+L’exécution est automatisée via le fichier `run.sh`, avec le choix du modèle en paramètre :
+
+```bash
+bash run.sh cnn  
