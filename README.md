@@ -38,7 +38,10 @@ L’objectif est de comparer deux architectures de modèles (MLP et CNN), d’ex
 
 ```bash
 .
-├── .gitignore
+├── .github
+│   └── workflows
+│       └── mlops.yml
+│── .gitignore
 ├── README.md
 ├── data
 │   └── raw
