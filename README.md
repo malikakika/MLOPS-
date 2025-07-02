@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.10-blue)
 ![PyTorch](https://img.shields.io/badge/pytorch-2.2-red)
 ![Docker](https://img.shields.io/badge/docker-ready-blue)
+![CI](https://github.com/malikakika/MLOPS-/actions/workflows/mlops.yml/badge.svg)
 
 Projet étudiant visant à entraîner et comparer deux modèles de classification (MLP et CNN) sur la base MNIST, et à les déployer via une API FastAPI et une interface utilisateur Streamlit. Le tout est conteneurisé avec Docker.
 
@@ -22,7 +23,8 @@ Projet étudiant visant à entraîner et comparer deux modèles de classificatio
 11. [Conclusion](#11-conclusion)
 12. [Lancement](#12-lancement)
 13. [Automatisation & Pipeline](#13-automatisation--pipeline)
-
+14. [CI/CD avec GitHub Actions](#14-cicd-avec-github-actions)
+15. [Bilan MLOps](#15-bilan-mlops)
 
 
 ---
@@ -254,4 +256,46 @@ Afin de rendre l’entraînement et l’évaluation reproductibles et industrial
 L’exécution est automatisée via le fichier `run.sh`, avec le choix du modèle en paramètre :
 
 ```bash
-bash run.sh cnn  
+bash run.sh cnn
+
+## 14. CI/CD avec GitHub Actions
+
+Un pipeline d'intégration continue a été mis en place via GitHub Actions.
+
+Il repose sur le fichier `.github/workflows/mlops.yml` qui automatise les étapes suivantes à chaque `push` ou `pull_request` sur la branche `main` :
+- Installation de Python 3.10
+- Installation des dépendances (`requirements.txt`)
+- Exécution du script `main_pipeline.py` avec le modèle CNN
+- Vérification de la présence du fichier modèle (`model/mnist_cnn.pt`)
+
+###  Rôle des composants
+
+- `main_pipeline.py` : le cœur du pipeline ML (entraîne/teste un modèle)
+- `run.sh` : script local simple pour exécuter le pipeline en MLP ou CNN
+- `.github/workflows/mlops.yml` : automate GitHub qui exécute le pipeline à chaque modification de code
+
+---
+
+###  Diagramme de relation
+
+```mermaid
+flowchart TD
+    PushCode[Code pushé sur GitHub] --> GitHubActions
+    GitHubActions["GitHub Actions\n(mlops.yml)"] --> Install[Installe Python + dépendances]
+    Install --> ExecutePipeline["Exécute main_pipeline.py"]
+    ExecutePipeline --> Resultats[📦 Génère modèle & matrice de confusion]
+
+## 15. Bilan MLOps
+
+Ce projet constitue une mise en œuvre complète d'un **pipeline MLOps Niveau 1**, selon les bonnes pratiques de production de modèles ML :
+
+-  **Pipeline ML reproductible** via `main_pipeline.py`
+-  **Exécution automatisée** locale avec `run.sh`
+-  **CI/CD fonctionnel** grâce à `.github/workflows/mlops.yml` (GitHub Actions)
+-  **Comparaison de deux architectures** (MLP vs CNN)
+- **Dockerisation complète** avec `docker-compose`
+-  **Modèle sauvegardé automatiquement** à chaque exécution (`model/mnist_*.pt`)
+-  **Évaluation visuelle** avec matrice de confusion
+-  **Reproductibilité assurée** sur n’importe quelle machine (via GitHub Actions ou Docker)
+
+ Ce projet prouve la capacité à passer d’un script ML exploratoire à une version industrialisable et automatisée, conforme aux exigences du **niveau MLOps 1**.
