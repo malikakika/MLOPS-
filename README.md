@@ -281,7 +281,7 @@ Il repose sur le fichier `.github/workflows/mlops.yml` qui automatise les étape
 ```mermaid
 flowchart TD
     PushCode[Code pushé sur GitHub] --> GitHubActions
-    GitHubActions["GitHub Actions\n(mlops.yml)"] --> Install[Installe Python + dépendances]
+    GitHubActions["GitHub Actions (mlops.yml)"] --> Install[Installe Python + dépendances]
     Install --> ExecutePipeline["Exécute main_pipeline.py"]
     ExecutePipeline --> Resultats[ Génère modèle & matrice de confusion]
 ```
