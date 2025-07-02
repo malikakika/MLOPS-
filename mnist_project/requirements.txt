@@ -16,3 +16,8 @@ torchvision
 Pillow
 opencv-python-headless
 numpy
+
+# Visualisation
+seaborn
+matplotlib
+
