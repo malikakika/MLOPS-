@@ -257,7 +257,7 @@ L’exécution est automatisée via le fichier `run.sh`, avec le choix du modèl
 
 ```bash
 bash run.sh cnn
-
+```
 ## 14. CI/CD avec GitHub Actions
 
 Un pipeline d'intégration continue a été mis en place via GitHub Actions.
@@ -284,7 +284,7 @@ flowchart TD
     GitHubActions["GitHub Actions\n(mlops.yml)"] --> Install[Installe Python + dépendances]
     Install --> ExecutePipeline["Exécute main_pipeline.py"]
     ExecutePipeline --> Resultats[📦 Génère modèle & matrice de confusion]
-
+```
 ## 15. Bilan MLOps
 
 Ce projet constitue une mise en œuvre complète d'un **pipeline MLOps Niveau 1**, selon les bonnes pratiques de production de modèles ML :
