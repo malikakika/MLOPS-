@@ -1,4 +1,4 @@
-# 🧠 MNIST Classification – Projet Deep Learning
+#  MNIST Classification – Projet Deep Learning
 
 ![Python](https://img.shields.io/badge/python-3.10-blue)
 ![PyTorch](https://img.shields.io/badge/pytorch-2.2-red)
@@ -283,7 +283,7 @@ flowchart TD
     PushCode[Code pushé sur GitHub] --> GitHubActions
     GitHubActions["GitHub Actions\n(mlops.yml)"] --> Install[Installe Python + dépendances]
     Install --> ExecutePipeline["Exécute main_pipeline.py"]
-    ExecutePipeline --> Resultats[📦 Génère modèle & matrice de confusion]
+    ExecutePipeline --> Resultats[ Génère modèle & matrice de confusion]
 ```
 ## 15. Bilan MLOps
 
